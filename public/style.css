@@ -1,0 +1,19 @@
+body{
+    font-family: Arial;
+    text-align:center;
+    margin-top:50px;
+}
+
+.container{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    max-width:300px;
+    margin:auto;
+}
+
+button{
+    padding:15px;
+    font-size:16px;
+    cursor:pointer;
+}
