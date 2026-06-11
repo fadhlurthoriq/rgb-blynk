@@ -1,42 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RGB Controller</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RGB Controller</title>
+<link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
 
-<h1>RGB LED Controller</h1>
+<div class="card">
 
-<div class="container">
+    <h1>RGB LED</h1>
 
-    <button onclick="setColor('red',1)">
-        🔴 RED ON
-    </button>
+    <div id="preview"></div>
 
-    <button onclick="setColor('red',0)">
-        🔴 RED OFF
-    </button>
+    <input
+        type="color"
+        id="picker"
+        value="#ff0000"
+    >
 
-    <button onclick="setColor('green',1)">
-        🟢 GREEN ON
-    </button>
-
-    <button onclick="setColor('green',0)">
-        🟢 GREEN OFF
-    </button>
-
-    <button onclick="setColor('blue',1)">
-        🔵 BLUE ON
-    </button>
-
-    <button onclick="setColor('blue',0)">
-        🔵 BLUE OFF
+    <button onclick="sendColor()">
+        Apply Color
     </button>
 
 </div>
 
-<script src="script.js"></script>
-
+<script src="/public/script.js"></script>
 </body>
 </html>
