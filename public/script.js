@@ -1,49 +1,55 @@
-const picker = document.getElementById("picker");
-const preview = document.getElementById("preview");
-const hexValue = document.getElementById("hexValue");
+const preview =
+document.getElementById("preview");
+
+const hexValue =
+document.getElementById("hexValue");
 
 let debounceTimer;
 
-picker.addEventListener("input", () => {
+const colorPicker =
+new iro.ColorPicker("#picker", {
 
-    const hex = picker.value;
+    width: 280,
 
-    // Preview langsung
-    preview.style.background = hex;
+    color: "#ff0000",
 
-    // Glow mengikuti warna
-    preview.style.boxShadow =
-        `0 0 30px ${hex}`;
+    borderWidth: 2,
 
-    // Tampilkan kode hex
-    hexValue.innerText =
-        hex.toUpperCase();
-
-    // Debounce
-    clearTimeout(debounceTimer);
-
-    debounceTimer =
-        setTimeout(() => {
-
-            sendColor(hex);
-
-        }, 300);
+    borderColor: "#ffffff"
 
 });
 
-async function sendColor(hex){
+colorPicker.on("color:change", function(color){
 
-    const r =
-        parseInt(hex.substring(1,3),16);
+    const hex = color.hexString;
 
-    const g =
-        parseInt(hex.substring(3,5),16);
+    preview.style.background = hex;
 
-    const b =
-        parseInt(hex.substring(5,7),16);
+    preview.style.boxShadow =
+    `0 0 40px ${hex}`;
+
+    hexValue.innerText =
+    hex.toUpperCase();
+
+    clearTimeout(debounceTimer);
+
+    debounceTimer = setTimeout(() => {
+
+        sendColor(color);
+
+    },300);
+
+});
+
+async function sendColor(color){
+
+    const r = color.rgb.r;
+    const g = color.rgb.g;
+    const b = color.rgb.b;
 
     try{
 
+        const response =
         await fetch("/api/rgb",{
 
             method:"POST",
@@ -60,10 +66,15 @@ async function sendColor(hex){
 
         });
 
+        console.log(
+            "RGB Sent:",
+            r,g,b
+        );
+
     }
     catch(error){
 
-        console.log(error);
+        console.error(error);
 
     }
 

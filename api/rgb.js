@@ -7,15 +7,15 @@ export default async function handler(req,res){
     req.body;
 
     await fetch(
-      `https://blynk.cloud/external/api/update?token=${token}&V0=${r}`
+        `https://blynk.cloud/external/api/update?token=${token}&V0=${r}`
     );
 
     await fetch(
-      `https://blynk.cloud/external/api/update?token=${token}&V1=${g}`
+        `https://blynk.cloud/external/api/update?token=${token}&V1=${g}`
     );
 
     await fetch(
-      `https://blynk.cloud/external/api/update?token=${token}&V2=${b}`
+        `https://blynk.cloud/external/api/update?token=${token}&V2=${b}`
     );
 
     res.status(200).json({
