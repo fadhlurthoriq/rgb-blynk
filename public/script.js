@@ -1,35 +1,70 @@
-const picker =
-document.getElementById("picker");
+const picker = document.getElementById("picker");
+const preview = document.getElementById("preview");
+const hexValue = document.getElementById("hexValue");
 
-const preview =
-document.getElementById("preview");
+let debounceTimer;
 
 picker.addEventListener("input", () => {
-    preview.style.background =
-    picker.value;
-});
-
-async function sendColor(){
 
     const hex = picker.value;
 
+    // Preview langsung
+    preview.style.background = hex;
+
+    // Glow mengikuti warna
+    preview.style.boxShadow =
+        `0 0 30px ${hex}`;
+
+    // Tampilkan kode hex
+    hexValue.innerText =
+        hex.toUpperCase();
+
+    // Debounce
+    clearTimeout(debounceTimer);
+
+    debounceTimer =
+        setTimeout(() => {
+
+            sendColor(hex);
+
+        }, 300);
+
+});
+
+async function sendColor(hex){
+
     const r =
-    parseInt(hex.substr(1,2),16);
+        parseInt(hex.substring(1,3),16);
 
     const g =
-    parseInt(hex.substr(3,2),16);
+        parseInt(hex.substring(3,5),16);
 
     const b =
-    parseInt(hex.substr(5,2),16);
+        parseInt(hex.substring(5,7),16);
 
-    await fetch("/api/rgb",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-            r,g,b
-        })
-    });
+    try{
+
+        await fetch("/api/rgb",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+                r:r,
+                g:g,
+                b:b
+            })
+
+        });
+
+    }
+    catch(error){
+
+        console.log(error);
+
+    }
 
 }

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RGB Controller</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB Controller</title>
+
+    <link rel="stylesheet" href="/public/style.css">
 </head>
 <body>
 
 <div class="card">
 
-    <h1>RGB LED</h1>
+    <h1>RGB LED Controller</h1>
 
     <div id="preview"></div>
 
@@ -20,12 +21,11 @@
         value="#ff0000"
     >
 
-    <button onclick="sendColor()">
-        Apply Color
-    </button>
+    <p id="hexValue">#FF0000</p>
 
 </div>
 
-<script src="script.js"></script>
+<script src="/public/script.js"></script>
+
 </body>
 </html>
